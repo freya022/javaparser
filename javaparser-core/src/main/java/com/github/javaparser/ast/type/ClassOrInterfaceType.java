@@ -254,8 +254,8 @@ public class ClassOrInterfaceType extends ReferenceType implements NodeWithSimpl
      * for example java/lang/Object
      */
     @Override
-    public String toDescriptor() {
-        return String.format("L%s;", resolve().asReferenceType().getQualifiedName().replace(".", "/"));
+    public String toDescriptor() { //TODO may not be a real fix if the descriptor doesn't specify the package
+        return String.format("L%s;", getNameWithScope().replace(".", "/"));
     }
 
     @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
