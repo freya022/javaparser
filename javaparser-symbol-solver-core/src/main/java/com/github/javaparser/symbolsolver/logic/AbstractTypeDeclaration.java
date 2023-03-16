@@ -21,10 +21,6 @@
 
 package com.github.javaparser.symbolsolver.logic;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.github.javaparser.resolution.MethodUsage;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
@@ -33,6 +29,10 @@ import com.github.javaparser.resolution.logic.FunctionalInterfaceLogic;
 import com.github.javaparser.resolution.types.ResolvedReferenceType;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.utils.Pair;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Common ancestor for most types.
@@ -51,7 +51,7 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
     public final Set<MethodUsage> getAllMethods() {
         Set<MethodUsage> methods = new HashSet<>();
 
-        Set<String> methodsSignatures = new HashSet<>();
+//        Set<String> methodsSignatures = new HashSet<>();
 
         for (ResolvedMethodDeclaration methodDeclaration : getDeclaredMethods()) {
             MethodUsage methodUsage = new MethodUsage(methodDeclaration);
@@ -59,7 +59,7 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
             String signature = methodUsage.getSignature();
             String returnType = methodUsage.getDeclaration().getReturnType().describe();
             String enhancedSignature = String.format("%s %s", returnType, signature);
-            methodsSignatures.add(enhancedSignature);
+//            methodsSignatures.add(enhancedSignature);
         }
 
         for (ResolvedReferenceType ancestor : getAllAncestors()) {
@@ -70,13 +70,13 @@ public abstract class AbstractTypeDeclaration implements ResolvedReferenceTypeDe
                 for (Pair<ResolvedTypeParameterDeclaration, ResolvedType> p : typeParametersMap) {
                     methodUsage = methodUsage.replaceTypeParameter(p.a, p.b);
                 }
-                String signature = methodUsage.getSignature();
-                String returnType = methodUsage.getDeclaration().getReturnType().describe();
-                String enhancedSignature = String.format("%s %s", returnType, signature);
-                if (!methodsSignatures.contains(enhancedSignature)) {
-                    methodsSignatures.add(enhancedSignature);
+//                String signature = methodUsage.getSignature();
+//                String returnType = methodUsage.getDeclaration().getReturnType().describe();
+//                String enhancedSignature = String.format("%s %s", returnType, signature);
+//                if (!methodsSignatures.contains(enhancedSignature)) {
+//                    methodsSignatures.add(enhancedSignature);
                     methods.add(mu);
-                }
+//                }
             }
         }
 
